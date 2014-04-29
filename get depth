@@ -1,0 +1,19 @@
+def readDepth(port,address):
+    import minimalmodbus
+    sensor = minimalmodbus.Instrument(port, address) # port name, slave address (in decimal) 
+    #sensor1.debug = True # PRINT out hex chars sent and received
+    sensor.serial.baudrate = 9600 #default is 19.2k so need to set this to 9600
+    PReg = 2 # addr of Pressure 32bit fp 
+    #TReg = 8 # addr of Temp signed 32bit fp
+    
+    #print sensor1   # print out all serial port paramters for debug
+    
+    Pressure = sensor.read_float(PReg) 
+    #Temperature = sensor.read_float(TReg)
+    
+    #print "Pressure: " + str(Pressure) + " bar"
+    #print "Temp: " + str(Temperature) + " degC"
+    
+    Depth = Pressure * 31.54 #1 bar = 33.54 feet of water
+    #print Depth
+    return Depth
