@@ -1,0 +1,5 @@
+db = pymysql.connect( host = 'remote.abacustek.com',
+      passwd = '32feather', user = 'arduino1', db='watershe_seabright')
+cursor = db.cursor()
+# ser = serial.Serial('-put in arduino serial #'s here-', 9600)
+# ser2 = serial.Serial('-put in arduino serial #'s here-', 9600)
