@@ -1,0 +1,19 @@
+
+def get_RPM(serial_port):
+#Function to parse the RPM Data	
+	def parse_RPM(string):
+		new_string = string[7:15] #gets the digits need to get the RPM from the string
+		dec = string[6] #gets the digit which tells you how many decimal points there are
+
+		new_string = float(int(new_string)) #makes string into a float
+		new_string = new_string/ 10**int(dec) #uses the dec variable to put decimal in correct place
+		return new_string
+#Main code	
+	ser = serial.Serial(serial_port, 9600) #assigns the serial
+	rawstring = ser.readline() #reads the serial, assigns it to a variable
+
+	RPM = parse_RPM(rawstring) #performs the parse RPM function
+	return RPM
+
+
+	
