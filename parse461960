@@ -7,4 +7,4 @@ def parse461960(string):
 
 	new_string = float(int(new_string))
 	new_string = new_string/ 10**int(dec)
-	print new_string
+	return new_string
