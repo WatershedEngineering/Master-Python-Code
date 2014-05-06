@@ -1,33 +1,41 @@
-def parse_EKM(response):
+def readEKM(EKMport):
 
-	d = {}
+	def parse_EKM(response): #takes the response and parses it
 
-	def floatize(string):
-		length = len(string)
-		newstring = string[:-2] + "." + string[length-1:length]
-		return newstring
-		print newstring
+		d = {}	#starts the dictionary
+
+		def floatize(string): #function for turning string
+			length = len(string) #calculates the length of the string
+			newstring = string[:-2] + "." + string[length-1:length] #inserts decimal point
+			return newstring 
 	
-	d["Address"]= response[:12]
-	d["Total kWh"] = floatize(response[12:20])
-	d["T1 kWh"] = floatize(response[20:28])
-	d["T2 kWh"] = floatize(response[28:36])
-	d["T3 kWh"] = floatize(response[36:44])
-	d["T4 kWh"] = floatize(response[44:52])
-	d["Tot Rev kWh"] = floatize(response[52:60])
-	d["1 Rev kWh"] = floatize(response[60:68])
-	d["T2 Rev kWh"] = floatize(response[68:76])
-	d["T3 Rev kWh"] = floatize(response[76:84])
-	d["T4 Rev kWh"] = floatize(response[84:91])
-	d["V1"] = floatize(response[92:96])
-	d["V2"] = floatize(response[96:100])
-	d["V3"] = floatize(response[100:104])
-	d["A1"] = floatize(response[104:108])
-	d["A2"] = floatize(response[108:113])
-	d["A3"] = floatize(response[113:118])
-	d["Power L1"] = floatize(response[118:125])
-	d["P2"] = floatize(response[125:132])
-	d["P3"] = floatize(response[132:139])
-	d["P_total"] = floatize(response[139:146])
+		d["Address"]= response[:12] #is not a float, does not use floatize, but appends it to dictionary with key "address"
+		d["Total kWh"] = floatize(response[12:20]) #making a segment of "response" into float. key  is "Total kWh"
+		d["T1 kWh"] = floatize(response[20:28]) #making a segment of "response" into float
+		d["T2 kWh"] = floatize(response[28:36]) #etc
+		d["T3 kWh"] = floatize(response[36:44])
+		d["T4 kWh"] = floatize(response[44:52])
+		d["Tot Rev kWh"] = floatize(response[52:60])
+		d["1 Rev kWh"] = floatize(response[60:68])
+		d["T2 Rev kWh"] = floatize(response[68:76])
+		d["T3 Rev kWh"] = floatize(response[76:84])
+		d["T4 Rev kWh"] = floatize(response[84:91])
+		d["V1"] = floatize(response[92:96])
+		d["V2"] = floatize(response[96:100])
+		d["V3"] = floatize(response[100:104])
+		d["A1"] = floatize(response[104:108])
+		d["A2"] = floatize(response[108:113])
+		d["A3"] = floatize(response[113:118])
+		d["Power L1"] = floatize(response[118:125])
+		d["P2"] = floatize(response[125:132])
+		d["P3"] = floatize(response[132:139])
+		d["P_total"] = floatize(response[139:146])
 
-	return d
+		return d #returns the dictionary
+		
+	ser=serial.Serial(EKMport,baudrate=9600,serial.parity="PARITY_EVEN") #setting up serial
+	sequence = '\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A" #sending the request sequence
+	ser.write(sequence) #writes the request sequence
+	response = ser.readline() #assigns the response a variable
+	return parse_EKM(response) #returns the dictionary
+	
