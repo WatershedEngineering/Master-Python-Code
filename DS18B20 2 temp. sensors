@@ -1,76 +1,93 @@
-
+// OneWire and DallasTemperature libraries from
+//   http://milesburton.com/index.php?title=Dallas_Temperature_Control_Library
+// Code based on examples from above and at
+//   http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html
+// See also http://www.arduino.cc/playground/Learning/OneWire
+ 
 #include <OneWire.h>
-
-
-const int sensors = 2; //number of temperature sensors on the bus
-int sensors_pin = 10; //the pin where the bus its connected to arduino
-uint8_t sensors_address[sensors][8]; //here will store the sensors addresses for later use
-
-OneWire  sensor_bus(sensors_pin);
-
-float get_temperature (uint8_t *address);
-
-void setup(void) {
+#include <DallasTemperature.h>
+ 
+// Data wire is plugged into pin 2 on the Arduino (can be any digital I/O pin)
+#define ONE_WIRE_BUS 10
+ 
+// Setup a oneWire instance to communicate with any OneWire devices
+// (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+ 
+// Pass our oneWire reference to Dallas Temperature.
+DallasTemperature sensors(&oneWire);
+ 
+int numberOfSensors;
+ 
+void setup(void)
+{
+  // start serial port
   Serial.begin(9600);
-  int x,y,c=0;
-  Serial.println("Starting to look for sensors...");
-  for(x=0;x<sensors;x++){
-    if(sensor_bus.search(sensors_address[x]))
-      c++;
+  Serial.println("1-Wire DS18B20 example code");
+ 
+  // Start up the library
+  sensors.begin();
+ 
+  delay(5000);  //important on linux as serial port can lock up otherwise
+  numberOfSensors = discoverOneWireDevices();
+  Serial.println();
+}
+ 
+void loop(void)
+{
+  printTemperaturesToSerial();
+  delay(10000); //wait 10 sec
+}
+ 
+void printTemperaturesToSerial(void) {
+  // call sensors.requestTemperatures() to issue a global temperature
+  // request to all devices on the bus
+  Serial.print("Requesting temperatures...");
+  sensors.requestTemperatures(); // Send the command to get temperatures
+  Serial.println("DONE");
+ 
+  // Read each of our sensors and print the value
+  for(int i=0; i < numberOfSensors; i++) {
+   Serial.print("Temperature for Device ");
+   Serial.print( i );
+   Serial.print(" is: ");
+   // Why "byIndex"? You can have more than one IC on the same bus. 
+   // 0 refers to the first IC on the wire
+   Serial.println( sensors.getTempCByIndex(i) );
   }
-  if(c > 0) {
-    Serial.println("Found this sensors : ");
-    for(x=0;x<sensors;x++) {
-      Serial.print("\tSensor ");
-      Serial.print(x+1);
-      Serial.print(" at address : ");
-      for(y=0;y<8;y++){
-        Serial.print(sensors_address[x][y],HEX);
-        Serial.print(" ");
-      }
-      Serial.println();
-    }
-  } else
-    Serial.println("Didn't find any sensors");
+ 
+  Serial.println();
 }
-
-void loop(void) {
-   
-    for(int x=0;x<sensors;x++) {
-      Serial.print("Sensor ");
-      Serial.print(x+1);
-      Serial.print(" ");
-      Serial.print(get_temperature(sensors_address[x]));
-      Serial.println(" C");
-    }
-    delay(2000);
-}
-
-float get_temperature(uint8_t *address) {
+ 
+// Based on http://www.hacktronics.com/Tutorials/arduino-1-wire-address-finder.html
+int discoverOneWireDevices(void) {
+  byte i;
+  byte present = 0;
   byte data[12];
-  int x;
-  sensor_bus.reset();
-  sensor_bus.select(address);
-  sensor_bus.write(0x44,1);
-  
-  sensor_bus.reset();
-  sensor_bus.select(address);
-  sensor_bus.write(0xBE,1);
-  
-  for(x=0;x<9;x++)
-    data[x] = sensor_bus.read();
-    
-  int tr = data[0];
-  if(data[1] > 0x80) {
-   tr = !tr+1;
-   tr = tr*-1;
+  byte addr[8];
+  int count = 0;
+ 
+  Serial.println("Looking for 1-Wire devices...");
+  while(oneWire.search(addr)) {
+    Serial.print("Found \'1-Wire\' device with address: ");
+    for( i = 0; i < 8; i++) {
+      Serial.print("0x");
+      if (addr[i] < 16) {
+        Serial.print('0');
+      }
+      Serial.print(addr[i], HEX);
+      if (i < 7) {
+        Serial.print(", ");
+      }
+    }
+    if ( OneWire::crc8( addr, 7) != addr[7]) {
+        Serial.println("CRC is not valid!");
+        return 0;
+    }
+    Serial.println();
+    count++;
   }
-  int cpc = data[7];
-  int cr = data[6];
-  
-  tr = tr>>1;
-  
-  float temperature = tr - (float)0.25+(cpc-cr)/(float)cpc;
-
-  return temperature;
+  Serial.println("That's it.");
+  oneWire.reset_search();
+  return count;
 }
