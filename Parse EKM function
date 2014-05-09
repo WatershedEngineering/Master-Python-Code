@@ -33,7 +33,7 @@ def readEKM(EKMport):
 
 		return d #returns the dictionary
 		
-	ser=serial.Serial(EKMport,baudrate=9600,serial.parity="PARITY_EVEN") #setting up serial
+	ser=serial.Serial(EKMport,baudrate=9600,parity=serial.PARITY_EVEN,bytesize=serial.SEVENBITS) #setting up serial
 	sequence = '\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A" #sending the request sequence
 	ser.write(sequence) #writes the request sequence
 	response = ser.readline() #assigns the response a variable
