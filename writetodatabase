@@ -1,0 +1,56 @@
+from datetime import datetime 
+import pymysql
+# import serial
+# # ser = serial.Serial('/dev/tty.usbserial-A601EG87', 9600)
+# # ser2 = serial.Serial('/dev/tty.usbserial-A603AXIT', 9600)
+# count = 0 
+db = pymysql.connect( host = 'localhost',
+      passwd = 'test', user = 'test', db='watershe_seabright')
+print("connected")
+cursor = db.cursor()
+# 
+# # cursor.execute("""INSERT INTO test (date, time, temp, light) VALUES ('2014-04-05', '1:22:10', 5, 6)""")
+# # db.commit()
+# 
+# print "data base opening..."
+# while count != 11:
+# 	now = datetime.now()
+# 	#temp = ser.readline() 
+# 	temp = 0
+# 	#light = ser2.readline()
+# 	light = 5
+# 	print temp
+# 	print light 
+# 	print str(now.hour)
+# 	time = str(now.hour) + ":" + str(now.minute) 
+# 	date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+# 	count = count + 1
+# 	insert_test = """INSERT INTO seabright_data (Date, Time, A1) VALUES ('%s', '%s', %s)""" % (date, time, temp)
+# 	print insert_test
+# 	try:
+# 	    cursor.execute(insert_test)
+# 	    db.commit()
+# 	    print "added to data base"
+# 	except:     
+# 		db.rollback()
+# 		print "exception occured" 
+# 	
+# db.close()
+# 
+# cursor.close()
+
+def saveData(Temp1, Temp2, RPM1, RPM2, Depth1, Depth2, A1, A2, KWH1, KWH2, V1, V2):
+	now = datetime.now()
+ 	time = str(now.hour) + ":" + str(now.minute) 
+ 	date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+ 	insert_string = """INSERT INTO seabright_data (Date, Time, `Temp 1`, `Temp 2`, `RPM 1`, `RPM 2`, `Depth 1`, `Depth 2`, A1, A2, `KWH 1`, `KWH 2`, V1, V2) VALUES ('%s', '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""" % (date,time,Temp1, Temp2, RPM1, RPM2, Depth1, Depth2, A1, A2, KWH1, KWH2, V1, V2)
+	print insert_string
+	try:
+	    cursor.execute(insert_string)
+	    db.commit()
+ 	    print "added to data base"
+ 	except:     
+ 		db.rollback()
+ 		print "exception occured" 
+ 		
+saveData(1,2,3,4,5,6,7,8,9,19,11,12)
