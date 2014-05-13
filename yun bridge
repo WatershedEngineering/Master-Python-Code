@@ -1,0 +1,22 @@
+#include <Bridge.h>
+
+unsigned long timer;
+unsigned long counter = 0L;
+
+void setup()
+{
+    Bridge.begin();     // this launches /usr/bin/run-bride on Linino
+    timer = millis();
+}
+
+void loop()
+{
+    /* Every 200ms: */
+
+    if (millis() - timer > 200) {
+        timer = millis();
+
+        Bridge.put("counter", String(counter++));
+        Bridge.put("random1", String(random(1, 100)));
+    }
+}
