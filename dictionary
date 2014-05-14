@@ -1,5 +1,5 @@
-DATA = {'Temp 1' : x, 'Temp 2' : x, 'RPM 1' : x, 'RPM 2' : x, 'Depth 1' : x, 'Depth 2' : x, 'A1' : x, 'A2' : x, 
-'KWH 1' : x, 'KWH 2' : x, 'V1' : x, 'V2' : x}
+DATA = {Temp1: x, Temp2 : x, RPM1 : x, RPM2 : x, Depth1 : x, Depth2 : x, A1 : x, A2 : x, 
+KWH1 : x, KWH2 : x, V1 : x, V2 : x}
 
 
 #ex. format in code when calling any of these keys --> RPM1= Get_RPM (1, Serial Port)
