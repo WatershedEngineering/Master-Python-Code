@@ -1,6 +1,21 @@
-DATA = {'Temp1': x, 'Temp2' : x, 'RPM1' : x, 'RPM2' : x, 'Depth1' : x, 'Depth2' : x,'A1' : x, 'A2' : x, 
-'KWH1' : x, 'KWH2' : x, 'V1' : x, 'V2' : x}
 
+data = OrderedDict()
+data
+OrderedDict([])
 
-#ex. format in code when calling any of these keys --> RPM1= Get_RPM (1, Serial Port)
+data['Temp1'] = x
+data['Temp2'] = x
+data['RPM1'] = x
+data['RPM2'] = x
+data['Depth1'] = x
+data['Depth2'] = x
+data['A1'] = x
+data['A2'] = x
+data['KWH1'] = x
+data['KWH2'] = x
+data['V1'] = x
+data['V2'] = x
+data
+OrderedDict([('Temp1', x), ('Temp2', x),('RPM1', x), ('RPM2', x),('Depth1', x), ('Depth2', x),('A1', x), ('A2', x),('KWH1', x), ('KWH2', x),('VH1', x), ('VH2', x)])
+
 #X = needs to be filled in
