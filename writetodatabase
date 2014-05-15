@@ -1,12 +1,37 @@
 from datetime import datetime 
 import pymysql
-# count = 0 
-
+from collections import OrderedDict
+# import serial
 db = pymysql.connect( host = 'localhost',
       passwd = 'test', user = 'test', db='watershe_seabright')
 print("connected")
 cursor = db.cursor()
 
+#data = OrderedDict()
+#data
+#OrderedDict([])
+
+#data['Temp1'] = 1
+#data['Temp2'] = 2
+#data['RPM1'] = 3
+#data['RPM2'] = 4
+#data['Depth1'] = 5
+#data['Depth2'] = 6
+#data['A1'] = 7
+#data['A2'] = 8
+#data['KWH1'] = 9
+#data['KWH2'] = 10
+#data['V1'] = 11
+#data['V2'] = 12
+#data
+#OrderedDict([('Temp1', 1), ('Temp2', 2),('RPM1', 3), ('RPM2', 4),('Depth1', 5), ('Depth2', 6),('A1', 7), ('A2', 8),('KWH1', 9), ('KWH2', 10),('VH1', 11), ('VH2', 12)])
+
+vals = []
+for value in data.itervalues():
+	vals.append(value)
+
+print vals
+    	
 def saveData(Temp1, Temp2, RPM1, RPM2, Depth1, Depth2, A1, A2, KWH1, KWH2, V1, V2):
 	now = datetime.now()
  	time = str(now.hour) + ":" + str(now.minute) 
@@ -20,4 +45,5 @@ def saveData(Temp1, Temp2, RPM1, RPM2, Depth1, Depth2, A1, A2, KWH1, KWH2, V1, V
  	except:     
  		db.rollback()
  		print "exception occured" 
- 		
+
+saveData(*vals)
