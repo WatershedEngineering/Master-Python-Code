@@ -2,8 +2,8 @@ from datetime import datetime
 import pymysql
 from collections import OrderedDict
 # import serial
-db = pymysql.connect( host = 'localhost',
-      passwd = 'test', user = 'test', db='watershe_seabright')
+db = pymysql.connect( host = 'remote.abacustek.com',
+      passwd = '32feather', user = 'arduino1', db='watershe_seabright')
 print("connected")
 cursor = db.cursor()
 
