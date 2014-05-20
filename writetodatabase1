@@ -1,0 +1,51 @@
+from datetime import datetime 
+import pymysql
+from collections import OrderedDict
+db = pymysql.connect( host = 'remote.abacustek.com',
+      passwd = '32feather', user = 'arduino1', db='watershe_seabright')
+print("connected")
+cursor = db.cursor()
+
+data = OrderedDict()
+data
+OrderedDict([])
+
+data['Temp1'] = 1
+data['Temp2'] = 2
+data['RPM1'] = 3
+data['Depth1'] = 5
+data['Depth2'] = 6
+data['A1'] = ekmd1['A1']
+data['A2'] = ekmd1['A2']
+data['A3'] = ekmd1['A3']
+data['KWH1'] = ekmd1['T1 kWh']
+data['KWH2'] = ekmd1['T2 kWh']
+data['KWH3'] = ekmd1['T3 kWh']
+data['V1'] = ekmd1['V1']
+data['V2'] = ekmd1['V2']
+data['V3'] = ekmd1['V3']
+
+data
+OrderedDict([('Temp1', 1), ('Temp2', 2),('RPM1', 3),('Depth1', 5), ('Depth2', 6),('A1', ekmd1['A1']), ('A2', ekmd1['A2']),('A3',ekmd1['A3']),('KWH1', ekmd1['T1 kWh']), ('KWH2', ekmd1['T2 kWh']), ('KWH3', ekmd1['T3 kWh']),('VH1', ekmd1['V1']), ('VH2', ekmd1['V2']),('VH3', ekmd1['V2'])])
+
+vals = []
+for value in data.itervalues():
+	vals.append(value)
+
+print vals
+    	
+def saveData(Temp1, Temp2, RPM1, Depth1, Depth2, A1, A2, A3, KWH1, KWH2, KWH3, V1, V2, V3):
+	now = datetime.now()
+ 	time = str(now.hour) + ":" + str(now.minute) 
+ 	date = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+ 	insert_string = """INSERT INTO seabright_data (Date, Time, `Temp 1`, `Temp 2`, `RPM 1`, `Depth 1`, `Depth 2`, A1, A2, A3, `KWH 1`, `KWH 2`,`KWH 3`, V1, V2, V3) VALUES ('%s', '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,)""" % (date,time,Temp1, Temp2, RPM1, Depth1, Depth2, A1, A2, A3, KWH1, KWH2, KWH3, V1, V2, V3)
+	print insert_string
+	try:
+	    cursor.execute(insert_string)
+	    db.commit()
+ 	    print "added to data base"
+ 	except:     
+ 		db.rollback()
+ 		print "exception occured" 
+
+saveData(*vals)
