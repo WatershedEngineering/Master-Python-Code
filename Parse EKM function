@@ -1,4 +1,4 @@
-def readEKM(EKMport):
+def readEKM(EKMport, sequence):
 
 	def parse_EKM(response): #takes the response and parses it
 
@@ -18,22 +18,27 @@ def readEKM(EKMport):
 		d["Total kWh"] = floatize8(response[16:24]) #8
 		d["T1 kWh"] = floatize8(response[24:32]) #8
 		d["T2 kWh"] = floatize8(response[32:40]) #8
+		d["T3 kWh"] = floatize8(response[40:48]) #8
 		d["Tot Rev kWh"] = floatize8(response[56:64]) #8
 		d["T1 Rev kWh"] = floatize8(response[64:72]) #8
 		d["T2 Rev kWh"] = floatize8(response[72:80]) #8
+		d["T3 Rev kWh"] = floatize8(response[80:88]) #8
 		d["V1"] = floatize4(response[96:100]) #4
 		d["V2"] = floatize4(response[100:104]) #4
+		d["V3"] = floatize4(response[104:108]) #4
 		d["A1"] = floatize4(response[108:113]) #5
 		d["A2"] = floatize4(response[113:118]) #5
+		d["A3"] = floatize4(response[118:123]) #5
 		d["P1"] = response[123:130] #7
 		d["P2"] = response[130:137] #7
+		d["P3"] = response[137:144]
 		d["Total Power"] = response[144:151] #7
 		return d #returns the dictionary
 
 	ser=serial.Serial(EKMport,baudrate=9600,parity=serial.PARITY_EVEN,bytesize=serial.SEVENBITS) #setting up serial
-	sequence = "\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A" #sending the request sequence
+	#sequence = "\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A" #sending the request sequence
 	ser.write(sequence) #writes the request sequence
 	response = ser.readline() #assigns the response a variable
+	print response
 	return parse_EKM(response) #returns the dictionary
-	
-return readEKM("/dev/ttyUSB2")
+
