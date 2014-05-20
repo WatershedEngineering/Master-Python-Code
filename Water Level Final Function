@@ -1,0 +1,25 @@
+AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+
+def Water_Level(User_Name, Pass_Code, Depth_1, Depth_2, Stream_code1, Stream_code2, Depth1, Depth2):
+	py.sign_in(User_Name, Pass_Code)
+	high = {'x': [], 'y': [], 'name': Depth_1, 'type': 'scatter',
+    		'stream': {'token': Stream_code1, 'maxpoints': 100}}	
+	low = {'x': [], 'y': [], 'name': Depth_2, 'type': 'scatter',
+			'stream': {'token': Stream_code2, 'maxpoints': 100}}
+	l = {'xaxis': {'range':[-1,1]}, 'yaxis': {'range': [-1,11]}}
+	py.iplot([high, low],layout=l, filename='Water Level', fileopt='overwrite')
+	on = py.Stream(Stream_code1)
+	tw = py.Stream(Stream_code2)
+	on.open()
+	tw.open()
+	
+	while True:
+		AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+		Depth1 = readDepth("/dev/ttyUSB3",2)
+		Depth2 = readDepth("/dev/ttyUSB3",1)
+		on.write({'x': AT, 'y': Depth1})
+		tw.write({'x': AT, 'y': Depth2})
+		time.sleep(60)
+	on.close()
+	tw.close()
+# Water_Level("watershedseabright", "itjyq9051w", 'Above the Dam', 'Below the Dam', 'injghm8nua', 'b3x3rdxu3r', readDepth("/dev/ttyUSB3",2), readDepth("/dev/ttyUSB3",1))
