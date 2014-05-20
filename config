@@ -1,6 +1,14 @@
-host = remote.abacustek.com
-passwd = 32feather
-user = arduino1
-db = watershe_seabright
-EKM2 = "\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A"
-EKM1 = "\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x03\x07\x0D\x0A"
+db_host : remote.abacustek.com
+db_passwd : 32feather
+db_user : arduino1
+db : watershe_seabright
+plotly_username : watershedseabright
+plotly_pw : itjyq9051w
+alarm_user_email: rparker@camdenmaine.gov
+alarm_user_cell_email : 2079753110@vtext.com
+gmail_user : seabright.dam@gmail.com
+gmail_pw : highwater
+EKM2 : \x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A
+EKM1 : \x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x03\x07\x0D\x0A
+streaming_code_1 : ffg2vlx9tc
+streaming_code_2 : lbzxvyu2ax
