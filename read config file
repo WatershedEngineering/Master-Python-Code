@@ -1,0 +1,29 @@
+def configreadline(var_line): #reads a line of the config file and adds it to configdict
+    global configdict #makes configdict global
+    var_line = var_line.replace(" ", "") #remove spaces from var_line
+    var_line = var_line.strip('\n') #removes newline characters from var_line
+    var_list = var_line.split(":") #changes var_line from a string into a two-part list, splitting it on either side of the colon
+    configdict[var_list[0]] = var_list[1] #adds var_list to configdict, with var_list[0] as the key and var_list[1] the value
+
+configdict = {}  #dictionary to store config values
+
+try:
+    f = open(r"C:\Users\jesse\Desktop\config.txt", "r") #open the file config.txt in the cwd
+except:
+    print "Can't find config file" #if the file can't be found
+
+with open(r"C:\Users\jesse\Desktop\config.txt",'r') as f: #run configreadline() on each line of config.txt and stop after the last line
+    while True:
+        line=f.readline()
+        if not line: break
+        configreadline(line)
+
+#make sure all they keys are in the dictionary that should be
+if 'db_host'in configdict and 'db_passwd' in configdict and 'db_user' in configdict and 'db' in configdict and 'plotly_username' in configdict and 'plotly_pw' in configdict and 'alarm_user_email' in configdict and 'alarm_user_cell_email' in configdict and 'gmail_user' in configdict and 'gmail_pw' in configdict and 'EKM1' in configdict and 'EKM2' in configdict and 'streaming_code_1' in configdict and 'streaming_code_2' in configdict:
+    print configdict 
+else:
+    print configdict    
+    print "you're missing stuff"
+
+
+f.close() #close the file
