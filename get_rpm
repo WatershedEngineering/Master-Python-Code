@@ -1,0 +1,27 @@
+#function to get RPM from a generator. Pass the serial port address 
+def get_RPM(serial_port):
+#Function to parse the RPM Data	
+	def parse_RPM(string):
+		new_string = string[11:15] #gets the digits need to get the RPM from the string
+		rpm = float(new_string)/10 #makes string into a float and divides by ten
+		return rpm
+	#Main code	
+	#set up serial port
+	ser = serial.Serial(serial_port, baudrate=9600,
+        bytesize=serial.EIGHTBITS,
+        parity=serial.PARITY_NONE,
+        stopbits=serial.STOPBITS_ONE,timeout=1) #assigns the serial
+	print "opening "+serial_port
+	data = ser.read(16)
+	print "raw data from serial port:"+data
+	ser.close()
+	#check for good data
+	if len(data)==0:
+		print "no rpm data from generator"
+		#set rpm to flag bad data
+		RPM = 9999.0
+	#parse the incoming data
+	else:
+		RPM = parse_RPM(data) #performs the parse RPM function
+		print "generator rpm: "+str(RPM)
+	return RPM
