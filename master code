@@ -1,0 +1,45 @@
+"""This is the master operating code for the seabright dam. 
+All code has been written by the students of the Watershed School Engineering class in 2014.
+"""
+
+#Import statements here
+
+
+#Procedures here
+
+#Get configuration and check for completeness
+
+#initialize global variables
+
+#main loop while true
+
+#Get Generator 1 electrical data
+
+#Get Generator 2 electrical data
+
+#Get Generator 1 RPM
+
+#Get Generator 2 RPM 
+
+#Get Upper Depth
+
+#Get Lower Depth
+
+#Get Temperatures
+
+#Write to Database
+
+#Update Plotly Plots
+
+#Check RPM between 600 - 610 if on, send text/email if out of range
+
+#Check temp above 2C send text/email if below
+
+#end of main loop
+
+#error handling
+
+#Check water levels and text/email if out of range
+
+#Delay 1/2 minute
+
