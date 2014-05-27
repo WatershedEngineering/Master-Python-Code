@@ -1,0 +1,25 @@
+AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+
+def Ambient(User_Name, Pass_Code, Temp_1, Temp_2, Stream_code1, Stream_code2, Temp1, Temp2):
+	py.sign_in(User_Name, Pass_Code)
+	temp1 = {'x': [], 'y': [], 'name': Line_1Na, 'type': 'scatter',
+    		'stream': {'token': Stream_code1, 'maxpoints': 100}}	
+	temp2 = {'x': [], 'y': [], 'name': Line_2Na, 'type': 'scatter',
+    
+	l = {'xaxis': {'range':[-1,1]}, 'yaxis': {'range': [-1,11]}}
+	py.iplot([temp_1, temp_2],layout=l, filename='Ambient', fileopt='overwrite')
+	on = py.Stream(Stream_code1)
+	tw = py.Stream(Stream_code2)
+	on.open()
+	tw.open()
+	
+	while True:
+		AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+		Temp1 = 
+		Temp2 = 
+		on.write({'x': AT, 'y': Temp1})
+		tw.write({'x': AT, 'y': Temp2})	
+		time.sleep(60)
+	on.close()
+	tw.close()
+# Ambient("watershedseabright", "itjyq9051w", 'Temperature 1', 'Temperature2', 'z2wy2ocrek', '11n3qi3sez', Get Temp1, Get Temp2)
