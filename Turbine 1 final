@@ -1,0 +1,49 @@
+AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+#turbine1 = readEKM("/dev/ttyUSB2","\x2F\x3F\x00\x00\x00\x00\x00\x00\x00\x01\x04\x05\x01\x02\x0D\x0A")
+
+def Turbine_1(User_Name, Pass_Code, RPM, Power_1, KWH_1, A_1, V_1, Stream_code1, Stream_code2, Stream_code3, Stream_code4, Stream_code5, rpm1, P1, KWH1, A1, V1):
+	py.sign_in(User_Name, Pass_Code)
+	
+	rpm = {'x': [], 'y': [], 'name': RPM, 'type': 'scatter',
+        	'stream': {'token': Stream_code2, 'maxpoints': 100}}
+	power = {'x': [], 'y': [], 'name': Power_1, 'type': 'scatter',
+        	'stream': {'token': Stream_code2, 'maxpoints': 100}}
+    kwh = {'x': [], 'y': [], 'name': KWH_1, 'type': 'scatter',
+    		'stream': {'token': Stream_code3, 'maxpoints': 100}}
+    a = {'x': [], 'y': [], 'name': A_1, 'type': 'scatter',
+    		'stream': {'token': Stream_code4, 'maxpoints': 100}}
+    v = {'x': [], 'y': [], 'name': V_1, 'type': 'scatter',
+    		'stream': {'token': Stream_code5, 'maxpoints': 100}}
+    
+	l = {'xaxis': {'range':[-1,1]}, 'yaxis': {'range': [-1,11]}}
+	py.iplot([rpm, power, kwh, a, v],layout=l, filename='Turbine 1', fileopt='overwrite')
+	on = py.Stream(Stream_code1)
+	tw = py.Stream(Stream_code2)
+	th = py.Stream(Stream_code3)
+	fo = py.stream(Stream_code4)
+	fi = py.Stream(Stream_code5)
+	on.open()
+	tw.open()
+	th.open()
+	fo.open()
+	fi.open()
+	while True:
+		AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
+		rpm1 = Get RPM
+		P1 = turbine1["Total Power"]
+		KWH1 = turbine1["Total kWh"]
+		A1 = turbine1["A1"]
+		V1 = turbine1["V1"]
+		on.write({'x': AT, 'y': rpm1})
+		tw.write({'x': AT, 'y': P1})
+		th.write({'x': AT, 'y': KWH1})
+		fo.write({'x': AT, 'y': A1})
+		fi.write({'x': AT, 'y': V1})
+		
+		time.sleep(60)
+	on.close()
+	tw.close()
+	th.close()
+	fo.close()
+	fi.close()
+#Turbine_1("watershedseabright", "itjyq9051w",'RPM', 'Power', 'Kwh', 'A', 'V', 'ffg2vlx9tc', 'lbzxvyu2ax', '2yiark4hi5', 'uqwae4vx8o', 'p9cv5zh2rl', Get RPM, turbine1["Total Power"], turbine1["Total kWh"], turbine1["V1"], turbine1["A1"])
