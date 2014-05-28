@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed May 07 09:28:57 2014
 
-@author: jesse
-"""
-   
 def readconfigfile(filelocation):
 
 #This function takes the location of config.txt as input and 
@@ -39,8 +33,43 @@ def readconfigfile(filelocation):
             configdict = configreadline(line, configdict)
     
     #make sure all they keys are in the dictionary that should be
-    if 'db_host'in configdict and 'db_passwd' in configdict and
-        'db_user' in configdict and 'db' in configdict and 'plotly_username' in configdict and 'plotly_pw' in configdict and 'alarm_user_email' in configdict and 'alarm_user_cell_email' in configdict and 'gmail_user' in configdict and 'gmail_pw' in configdict and 'EKM1' in configdict and 'EKM2' in configdict and 'streaming_code_1' in configdict and 'streaming_code_2' in configdict and 'upper_depth_offset' in configdict and 'lower_depth_offset' in configdict and 'abovedam_depth_up_alarm' in configdict and 'abovedam_depth_down_alarm' in configdict and 'belowdam_depth_up_alarm' in configdict and 'belowdam_depth_down_alarm' in configdict and 'rpm_port_1' in configdict and 'rpm_port_2' in configdict and 'EKM_port' in configdict and 'depth_port' in configdict:
+    if ('db_host'in configdict and
+        'db_passwd' in configdict and
+        'db_user' in configdict and
+        'db' in configdict and
+        'plotly_username' in configdict and
+        'plotly_pw' in configdict and
+        'alarm_user_email' in configdict and
+        'alarm_user_cell_email' in configdict and
+        'gmail_user' in configdict and
+        'gmail_pw' in configdict and
+        'EKM1' in configdict and
+        'EKM2' in configdict and
+        'streaming_code_1' in configdict and
+        'streaming_code_2' in configdict and
+        'streaming_code_3' in configdict and 
+        'streaming_code_4' in configdict and
+        'streaming_code_5' in configdict and
+        'streaming_code_6' in configdict and
+        'streaming_code_7' in configdict and
+        'streaming_code_8' in configdict and
+        'streaming_code_9' in configdict and
+        'streaming_code_10' in configdict and
+        'streaming_code_11' in configdict and
+        'streaming_code_12' in configdict and
+        'streaming_code_13' in configdict and
+        'streaming_code_14' in configdict and
+        'upper_depth_offset' in configdict and
+        'lower_depth_offset' in configdict and
+        'abovedam_depth_up_alarm' in configdict and
+        'abovedam_depth_down_alarm' in configdict and
+        'belowdam_depth_up_alarm' in configdict and
+        'belowdam_depth_down_alarm' in configdict and
+        'rpm_port_1' in configdict and
+        'rpm_port_2' in configdict and
+        'EKM_port' in configdict and
+        'depth_port' in configdict):
+            
         print configdict 
         configdict['returncode'] = 2
         print 'all good -', 2
@@ -51,5 +80,3 @@ def readconfigfile(filelocation):
     
     return configdict
     f.close() #close the file
-
-readconfigfile(r"C:\Users\jesse\Desktop\config.txt")
