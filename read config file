@@ -7,10 +7,13 @@ Created on Wed May 07 09:28:57 2014
    
 def readconfigfile(filelocation):
 
-#This function returns 0 if the config file can't be found, 1 if any keys
-#are missing, and 2 if everything works. It returns a dictionary called 
-#configdict, with config varibles as keys and the values as their values. 
-#config.txt should be a text file, with each line formatted like this: 
+#This function takes the location of config.txt as input and 
+#returns a dictionary called configdict, with config variables
+#as keys and the values as their values. configdict also
+#includes the key 'returncode', whose value is a 0 if config.txt
+#can't be found, a 1 if keys are missing from the dictionary,
+#and a 2 if everything works. config.txt should be a text file,
+#with each line formatted like this: 
 #key : value 
     
     def configreadline(var_line, configdict): #reads a line of the config file and adds it to configdict
