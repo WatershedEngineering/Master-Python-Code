@@ -1,0 +1,33 @@
+def depth_alarm(depth, alarmdepth, highlow):
+#pass the current depth wherever you're checking(above or below the dam) as depth
+#pass the minimum or maximum depth that should set off an alarm (from the config file) as alarmdepth. 
+#If a high water level should set off the alarm, enter "high" as highlow
+#If a low water level should set off the alarm, enter "low" as highlow
+#If the alarm level has been reached, this function returns a 1
+#If the water level is acceptable, it returns a 2
+#If the depth is neither above, below, or equal to the alarm value (I guess if it wasn't an integer or float)
+#   It returns a zero. I don't know if this could ever happen.
+#if highlow isn't either "high" or "low", it returns a 3.
+    if highlow == 'high':
+        if depth >= alarmdepth:
+            print "The water level is too high!"            
+            return 1
+        elif depth < alarmdepth:
+            print "The water level isn't too high."            
+            return 2
+        else: 
+            print "something's wrong with the depth"
+            return 0
+    elif highlow == 'low':
+        if depth <= alarmdepth:
+            print "The water level is too low!"
+            return 1
+        elif depth > alarmdepth:
+            print "The water level isn't too low."            
+            return 2
+        else:
+            print "something's wrong with the depth"            
+            return 0
+    else:
+        print "depth_alarm() should be called with highlow as either 'high' or 'low.'"
+        return 3
