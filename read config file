@@ -1,4 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed May 07 09:28:57 2014
 
+@author: jesse
+"""
+   
 def readconfigfile(filelocation):
 
 #This function takes the location of config.txt as input and 
@@ -64,7 +70,6 @@ def readconfigfile(filelocation):
         'abovedam_depth_up_alarm' in configdict and
         'abovedam_depth_down_alarm' in configdict and
         'belowdam_depth_up_alarm' in configdict and
-        'belowdam_depth_down_alarm' in configdict and
         'rpm_port_1' in configdict and
         'rpm_port_2' in configdict and
         'EKM_port' in configdict and
@@ -80,3 +85,5 @@ def readconfigfile(filelocation):
     
     return configdict
     f.close() #close the file
+
+readconfigfile(r"C:\Users\jesse\Desktop\config.txt")
