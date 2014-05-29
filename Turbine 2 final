@@ -28,11 +28,11 @@ def Turbine_2(User_Name, Pass_Code, RPM, Power_1, KWH_1, A_1, V_1, Stream_code1,
 	fi.open()
 	while True:
 		AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-		rpm1 = 	#Get RPM
-		P1 = 	#Get Total Power
-		KWH1 = 	#Get Total kWh
-		A1 = 	#Get A1
-		V1 = 	#Get V1
+		rpm1 = data["RPM2"]
+		P1 = data["ekmd2"]["Total Power"]
+		KWH1 = data["ekmd2"]["Total kWh"]
+		A1 = data["ekmd2"]["A1"]
+		V1 = data["ekmd2"]["V1"]
 		on.write({'x': AT, 'y': rpm1})
 		tw.write({'x': AT, 'y': P1})
 		th.write({'x': AT, 'y': KWH1})
@@ -45,4 +45,4 @@ def Turbine_2(User_Name, Pass_Code, RPM, Power_1, KWH_1, A_1, V_1, Stream_code1,
 	th.close()
 	fo.close()
 	fi.close()
-#Turbine_2("watershedseabright", "itjyq9051w",'RPM', 'Power', 'Kwh', 'A', 'V', 'mj671ds1gv', 'rfwayhjeoz', 'q2q20s6ugn', 'b6nzhxoyiv', 'sa93jazc5i', Get RPM, Get Total Power, Get Total kWh, Get A1, Get V1)
+Turbine_2("watershedseabright", "itjyq9051w",'RPM', 'Power', 'Kwh', 'A', 'V', 'mj671ds1gv', 'rfwayhjeoz', 'q2q20s6ugn', 'b6nzhxoyiv', 'sa93jazc5i', data["RPM2"], data["ekmd2"]["Total Power"], data["ekmd2"]["Total kWh"], data["ekmd2"]["A1"], data["ekmd2"]["V1"])
