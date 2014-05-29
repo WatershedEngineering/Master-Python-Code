@@ -1,0 +1,4 @@
+Ambient("watershedseabright", "itjyq9051w", 'Temperature 1', 'Temperature2', 'z2wy2ocrek', '11n3qi3sez', Get Temp1, Get Temp2)
+Turbine_1("watershedseabright", "itjyq9051w",'RPM', 'Power', 'Kwh', 'A', 'V', 'ffg2vlx9tc', 'lbzxvyu2ax', '2yiark4hi5', 'uqwae4vx8o', 'p9cv5zh2rl', Get RPM, Get Total Power, Get Total kWh, Get A1, Get V1)
+Turbine_2("watershedseabright", "itjyq9051w",'RPM', 'Power', 'Kwh', 'A', 'V', 'mj671ds1gv', 'rfwayhjeoz', 'q2q20s6ugn', 'b6nzhxoyiv', 'sa93jazc5i', Get RPM, Get Total Power, Get Total kWh, Get A1, Get V1)
+Water_Level("watershedseabright", "itjyq9051w", 'Above the Dam', 'Below the Dam', 'injghm8nua', 'b3x3rdxu3r', readDepth("/dev/ttyUSB3",2), readDepth("/dev/ttyUSB3",1))
