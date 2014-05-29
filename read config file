@@ -85,5 +85,3 @@ def readconfigfile(filelocation):
     
     return configdict
     f.close() #close the file
-
-readconfigfile(r"C:\Users\jesse\Desktop\config.txt")
