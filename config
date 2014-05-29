@@ -24,12 +24,11 @@ streaming_code_11 : injghm8nua
 streaming_code_12 : b3x3rdxu3r
 streaming_code_13 : z2wy2ocrek
 streaming_code_14 : 11n3qi3sez
-upper_depth_offset : 0.49
-lower_depth_offset : 1.15
-abovedam_depth_up_alarm : 
-abovedam_depth_down_alarm : 
-belowdam_depth_up_alarm : 
-belowdam_depth_down_alarm : 
+upper_depth_offset : 119.51
+lower_depth_offset : 104.85
+abovedam_depth_up_alarm : 125
+abovedam_depth_down_alarm : 123
+belowdam_depth_up_alarm : 110
 rpm_port_1 : /dev/ttyUSB0
 rpm_port_2 : /dev/ttyUSB1
 EKM_port : /dev/ttyUSB2
