@@ -1,5 +1,5 @@
 AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-
+ 
 def Water_Level(User_Name, Pass_Code, Depth_1, Depth_2, Stream_code1, Stream_code2, Depth1, Depth2):
 	py.sign_in(User_Name, Pass_Code)
 	high = {'x': [], 'y': [], 'name': Depth_1, 'type': 'scatter',
@@ -15,11 +15,11 @@ def Water_Level(User_Name, Pass_Code, Depth_1, Depth_2, Stream_code1, Stream_cod
 	
 	while True:
 		AT = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
-		Depth1 = readDepth("/dev/ttyUSB3",2)
-		Depth2 = readDepth("/dev/ttyUSB3",1)
+		Depth1 = data["topDepth"]
+		Depth2 = data["bottomDepth"]
 		on.write({'x': AT, 'y': Depth1})
 		tw.write({'x': AT, 'y': Depth2})
 		time.sleep(60)
 	on.close()
 	tw.close()
-# Water_Level("watershedseabright", "itjyq9051w", 'Above the Dam', 'Below the Dam', 'injghm8nua', 'b3x3rdxu3r', readDepth("/dev/ttyUSB3",2), readDepth("/dev/ttyUSB3",1))
+Water_Level("watershedseabright", "itjyq9051w", 'Above the Dam', 'Below the Dam', 'injghm8nua', 'b3x3rdxu3r', data["topDepth"], data["bottomDepth"])
